@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 import rw.pacis.ne.auth_boilerplate.enums.EGender;
 import javax.persistence.*;
 
@@ -23,7 +24,8 @@ import java.util.UUID;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Type(type = "uuid-binary")
+    @Column(name = "id", columnDefinition = "binary(16)")
     private UUID id;
 
     @Column(name = "first_name")

@@ -44,6 +44,7 @@ public class UserController {
         user.setLastName(dto.getLastName());
         user.setGender(dto.getGender());
         user.setPhoneNumber(dto.getMobile());
+        user.setNationalId(dto.getNationalId());
         user.setPassword(encodedPassword);
 
         User entity = this.userService.create(user);

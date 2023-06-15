@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="auth_boilerplate" />
+        <module name="Auth_Boilerplate" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Auth_Boilerplate" options="-parameters" />
       <module name="auth_boilerplate" options="-parameters" />
     </option>
   </component>

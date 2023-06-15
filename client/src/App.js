@@ -1,14 +1,22 @@
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
-// import Signup from './pages/Signup';
+import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
 
 function App() {
   return (
-    <div className="App">
-    <Dashboard/>
-     
-    </div>
+    <Router>
+    {/* <Navbar /> */}
+      <Routes>
+        <Route path="/" exact element={<Signup />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/signup" exact element={<Signup />} />
+        <Route path="/dashboard" exact element={<Dashboard />} />
+        
+       
+      </Routes>
+    </Router>
   );
 }
 
