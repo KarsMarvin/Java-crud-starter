@@ -53,7 +53,7 @@ function LoginForm() {
 
   return (
     <>
-                <div className="flex items-center justify-center h-screen">
+                <div className="flex items-center justify-center h-screen ">
     <div className="w-full max-w-md">
               <div className="px-6 py-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">

@@ -72,19 +72,11 @@ function EditForm({ data }) {
   }, [submitted, navigate]);
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-full max-w-md">
-          <div className="px-6 py-6 lg:px-8">
-            <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              Sign in to our platform
-            </h3>
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              {error && <div className="error">{error}</div>}
-            </p>
+      
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="px-6 py-6 md:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-                  Register Your Employees
+                  Edit Employee Details
                 </h3>
                 {error && <div className="error">{error}</div>}
                 <div className="mb-6">
@@ -181,9 +173,7 @@ function EditForm({ data }) {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      </div>
+       
     </>
   );
 }

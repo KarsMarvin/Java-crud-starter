@@ -62,12 +62,12 @@ function SignForm() {
                 <div className="flex items-center justify-center ">
                 <div className="w-full max-w-md">
                 
-              <div className="px-6 py-6 md:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+              <div className="px-3 py-3 mt-8 md:px-8">
+                <h3 className="mb-8 text-xl font-medium text-gray-900 dark:text-white">
                   Sign in to our platform
                 </h3>
                 {error && <div className="error">{error}</div>}
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <form className="space-y-2" onSubmit={handleSubmit}>
                   <div>
                     <label
                       htmlFor="firstname"
