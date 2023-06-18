@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/api/v1/employee")
 @CrossOrigin("*")
 public class EmployeeController {
 
@@ -24,26 +24,26 @@ public class EmployeeController {
     }
 
     /**This is a post Request, here we are gonna ba saving an employee*/
-    @PostMapping
+    @PostMapping(path="/register")
     public Employee saveEmployee(@RequestBody Employee employee){
         return employeeService.saveEmployee(employee);
     }
     /** Here, we are getting all employee*/
-    @GetMapping
+    @GetMapping(path = "/getAll")
     public List<Employee> getAllEmployee(){
         return employeeService.getAllEmployee();
     }
-    /**here, we are geting one empployee*/
+    /**here, we are getting one employee*/
     @GetMapping("/{id}")
     public Optional<Employee> getEmployeeById(@PathVariable UUID id){
         return employeeService.getEmployeeById(id);
     }
-    /**here, we get gonna be updating an employee*/
+    /**here, we get going to  be updating an employee*/
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable UUID id, @RequestBody Employee employee){
         return employeeService.updateEmployee(id,employee);
     }
-    /**Here, we are gonna be deleting an employee*/
+    /**Here, we are going to be deleting an employee*/
     @DeleteMapping("/{id}")
     public void deleteEmployee(@PathVariable UUID id){
         employeeService.deleteEmployee(id);

@@ -12,27 +12,43 @@ function LoginForm() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
+    
       try {
         const response = await axios.post('http://localhost:8000/api/v1/auth/login', {
           email,
           password,
         });
-  
-        console.log(response.data); // Handle successful login
-        const token = response?.data?.token;
-        localStorage.setItem('token', token);
-        if (token) {
+    
+        if (response && response.data) {
+          console.log(response.data); // Handle successful login
+          const token = response.data.data.accessToken;
+
+          localStorage.setItem('token', token);
           setEmail('');
           setPassword('');
-          setError('')
+          setError('');
+          navigate('/dashboard');
+        } else {
+          throw new Error('Invalid response');
         }
-  
-        navigate('/dashboard')
       } catch (error) {
-        setError(error.response.data.message);
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          console.log(error.response.data); // Server error response data
+          console.log(error.response.status); // Server error status code
+          setError(error.response.data.message);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request); // Request object
+          setError('No response received from the server');
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message); // Error message
+          setError('An error occurred during login');
+        }
       }
     };
+    
   
 
   return (
@@ -44,7 +60,6 @@ function LoginForm() {
                   Sign in to our platform
                 </h3>
                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"> {error && <div className="error">{error}</div>}</p>
-                {error && <div className="error">{error}</div>}
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label

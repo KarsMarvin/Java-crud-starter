@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "employees", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"}), @UniqueConstraint(columnNames = {"phone_number"})})
+@Table(name = "employees", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"}), @UniqueConstraint(columnNames = {"national_id"})})
 @OnDelete(action = OnDeleteAction.CASCADE)
 public class Employee {
     @Id
@@ -34,8 +34,6 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
@@ -43,30 +41,18 @@ public class Employee {
     @Column(name = "national_id")
     private String nationalId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private EGender gender;
+    @Column(name = "salary")
+    private String salary;
 
 
-
-    public Employee(String firstName, String lastName, String phoneNumber, String email, EGender gender) {
+    public Employee(String firstName, String lastName, String nationalId, String email, String salary) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.gender = gender;
-    }
-
-    public Employee(String firstName, String lastName, String phoneNumber, String email, EGender gender, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.gender = gender;
+        this.nationalId = nationalId;
+        this.salary = salary;
 
     }
 
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
-    }
+
 }

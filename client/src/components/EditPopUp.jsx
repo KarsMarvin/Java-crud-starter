@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
-import AddForm from './AddForm';
+import EditForm from './EditForm';
 
-function PopupModal() {
+function EditPopUp({ data, onClose }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleFormSubmit = () => {
+    // Perform form submission logic here
+    // ...
+
+    // Close the popup
+    toggleModal();
+
+    // Call the onClose function to notify the parent component
+    onClose();
+  };
+
   return (
     <div>
-      <button onClick={toggleModal} className="text-blue-500 bg-blue-200 border border-blue-500 px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white">
-  Open Popup
-</button>
+      <button
+        onClick={toggleModal}
+        className="text-blue-500 bg-blue-200 border border-blue-500 px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white"
+      >
+        Edit Employee
+      </button>
 
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -38,10 +52,10 @@ function PopupModal() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="sr-only">Close modal</span>
+                <span className="sr-only">Close</span>
               </button>
               <div className="p-6 text-center">
-         <AddForm/>
+                <EditForm data={data} onSubmit={handleFormSubmit} />
               </div>
             </div>
           </div>
@@ -51,4 +65,4 @@ function PopupModal() {
   );
 }
 
-export default PopupModal;
+export default EditPopUp;

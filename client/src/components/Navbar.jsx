@@ -1,6 +1,74 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    // Redirect to login if no token is found
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [profileData,setProfileData] = useState({})
+  
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (event.target.closest('[data-dropdown-toggle="dropdown-user"]')) {
+      return;
+    }
+
+    setIsDropdownOpen(false);
+  };
+
+  useEffect(()=>{
+    
+    async function loadData(){
+      const token = localStorage.getItem('token');
+      if (token) {
+        
+      const headers = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      };
+      const response = await axios.get('http://localhost:8000/api/v1/users/current-user',headers);
+      setProfileData(response.data.data)
+      console.warn(response.data.data)
+    }
+  }
+
+    loadData()
+
+    
+  })
+  React.useEffect(() => {
+    if (isDropdownOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    navigate('/login'); // Replace '/login' with the actual path of your login page
+  };
+
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -35,7 +103,7 @@ const Navbar = () => {
                 alt="FlowBite Logo"
               />
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                Flowbite
+                APP Name
               </span>
             </a>
           </div>
@@ -45,8 +113,9 @@ const Navbar = () => {
                 <button
                   type="button"
                   className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                  aria-expanded="false"
+                  aria-expanded={isDropdownOpen}
                   data-dropdown-toggle="dropdown-user"
+                  onClick={handleDropdownToggle}
                 >
                   <span className="sr-only">Open user menu</span>
                   <img
@@ -56,54 +125,60 @@ const Navbar = () => {
                   />
                 </button>
               </div>
-              <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-                <div className="px-4 py-3" role="none">
-                  <p className="text-sm text-gray-900 dark:text-white" role="none">
-                    Neil Sims
-                  </p>
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    neil.sims@flowbite.com
-                  </p>
+              {isDropdownOpen && (
+                <div
+                  className="top-8 z-50 absolute right-0 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                  id="dropdown-user"
+                >
+                  <div className="px-4 py-3" role="none">
+                    <p className="text-sm text-gray-900 dark:text-white" role="none">
+                      {profileData?.firstName + " "+profileData?.lastName}
+                    </p>
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                      {profileData?.email}
+                    </p>
+                  </div>
+                  <ul className="py-1" role="none">
+                    {/* <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        role="menuitem"
+                      >
+                        Dashboard
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        role="menuitem"
+                      >
+                        Settings
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        role="menuitem"
+                      >
+                        Earnings
+                      </a>
+                    </li> */}
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        role="menuitem"
+                        onClick={handleSignOut}
+                      >
+                        Sign out
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="py-1" role="none">
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Sign out
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              )}
             </div>
           </div>
         </div>

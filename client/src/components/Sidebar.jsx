@@ -1,6 +1,17 @@
-import React from "react";
+import {React,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+
+  //   // Redirect to login if no token is found
+  //   if (!token) {
+  //     navigate('/login');
+  //   }
+  // }, [navigate]);
   return (
     <aside
       id="logo-sidebar"

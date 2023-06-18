@@ -3,6 +3,7 @@ import './App.css';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import EditForm from "./components/EditForm";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" exact element={<Login />} />
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
+        <Route path="/edit" exact element={<EditForm />} />
         
        
       </Routes>
