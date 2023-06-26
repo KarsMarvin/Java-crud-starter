@@ -4,12 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 function SignForm() {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
   const [password, setPassword] = useState('');
   const [mobile, setPhone] = useState('');
-  const [nationalId, setNationalId] = useState('');
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
@@ -20,11 +17,8 @@ function SignForm() {
     try {
       const response = await axios.post('http://localhost:8000/api/v1/users/register', {
         firstName,
-        lastName,
         email,
-        gender,
         mobile,
-        nationalId,
         password,
       });
   
@@ -32,11 +26,8 @@ function SignForm() {
   
       // Reset form fields
       setFirstName('');
-      setLastName('');
-      setGender('');
       setEmail('');
       setPhone('');
-      setNationalId('');
       setPassword('');
       setError('');
   
@@ -86,24 +77,7 @@ function SignForm() {
                       required
                     />
                   </div>
-                  <div>
-                    <label
-                      htmlFor="lastname"
-                      className="block  text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastname"
-                      id="lastname"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                      placeholder="Doe"
-                      required
-                    />
-                  </div>
+                  
                   <div>
                     <label
                       htmlFor="phone"
@@ -122,24 +96,7 @@ function SignForm() {
                       required
                     />
                   </div>
-                  <div>
-                    <label
-                      htmlFor="nationalId"
-                      className="block  text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      National Id
-                    </label>
-                    <input
-                      type="text"
-                      name="nationalId"
-                      id="nationalId"
-                      value={nationalId}
-                      onChange={(e) => setNationalId(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                      placeholder="123456789"
-                      required
-                    />
-                  </div>
+                  
                   <div>
                     <label
                       htmlFor="email"
@@ -158,7 +115,7 @@ function SignForm() {
                       required
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label
                       htmlFor="gender"
                       className="block  text-sm font-medium text-gray-900 dark:text-white"
@@ -177,7 +134,7 @@ function SignForm() {
                       <option value='FEMALE'>Female</option>
                       
                     </select>
-                  </div>
+                  </div> */}
                   <div>
                     <label
                       htmlFor="password"

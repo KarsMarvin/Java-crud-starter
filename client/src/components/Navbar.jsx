@@ -44,7 +44,7 @@ const Navbar = () => {
       };
       const response = await axios.get('http://localhost:8000/api/v1/users/current-user',headers);
       setProfileData(response.data.data)
-      console.warn(response.data.data)
+      // console.warn(response.data.data)
     }
   }
 
@@ -103,7 +103,7 @@ const Navbar = () => {
                 alt="FlowBite Logo"
               />
               <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                APP Name
+                Binary Supermarket
               </span>
             </a>
           </div>
@@ -132,14 +132,14 @@ const Navbar = () => {
                 >
                   <div className="px-4 py-3" role="none">
                     <p className="text-sm text-gray-900 dark:text-white" role="none">
-                      {profileData?.firstName + " "+profileData?.lastName}
+                      {profileData?.firstName + " "}
                     </p>
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                       {profileData?.email}
                     </p>
                   </div>
                   <ul className="py-1" role="none">
-                    {/* <li>
+                    <li>
                       <a
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -154,7 +154,7 @@ const Navbar = () => {
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                         role="menuitem"
                       >
-                        Settings
+                        Add to Cart
                       </a>
                     </li>
                     <li>
@@ -165,7 +165,7 @@ const Navbar = () => {
                       >
                         Earnings
                       </a>
-                    </li> */}
+                    </li>
                     <li>
                       <a
                         href="#"

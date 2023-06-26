@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddEmployeeForm from './AddEmployeeForm';
+import BuyProductForm from './BuyProductForm';
 
 function AddPopUp() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +11,7 @@ function AddPopUp() {
   return (
     <div>
       <button onClick={toggleModal} className="text-blue-500 bg-blue-200 border border-blue-500 px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white">
-        Add Employee
+        Buy Product
       </button>
 
       {isOpen && (
@@ -41,7 +41,7 @@ function AddPopUp() {
                 <span className="sr-only">Close</span>
               </button>
               <div className="p-6 text-center">
-         <AddEmployeeForm/>
+         <BuyProductForm/>
               </div>
             </div>
           </div>
